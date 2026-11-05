@@ -1,3 +1,5 @@
+[Installation Guide](installation.md)
+
 # Quiz Integrity Logger
 
 A quiz platform that records student activity during an attempt and gives teachers an explainable **integrity concern indicator** for review. Every scoring rule produces a reason, and the teacher makes the final decision.
