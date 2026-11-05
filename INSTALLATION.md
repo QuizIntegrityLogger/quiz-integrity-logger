@@ -1,8 +1,8 @@
-# Node.js installation and project setup
+# Installation and Setup
 
-Commands for Quiz Integrity Logger on Windows PowerShell. Run each command in the order shown.
+This guide covers how to get Quiz Integrity Logger running on your machine. The commands are written for Windows PowerShell, so you may need to adjust a few if you're on a different shell. Follow the steps in order.
 
-Use Node.js 24 with npm. Check your installation:
+The project uses Node.js 24 with npm. Confirm your versions before starting:
 
 ```powershell
 node -v
@@ -11,20 +11,20 @@ npm -v
 
 ## 1. Open the project root
 
-Open the folder containing `server`, `client`, and `README.md` in VS Code, then open its terminal.
+Open the folder that contains `server`, `client`, and `README.md` in VS Code, then open a terminal there.
 
-If you need a fresh clone, run these commands from a parent folder where the project does not already exist:
+If you don't have the project yet, clone it from a parent folder that doesn't already contain it:
 
 ```powershell
 git clone https://github.com/QuizIntegrityLogger/quiz-integrity-logger.git
 cd quiz-integrity-logger
 ```
 
-If the repository is already cloned, use that existing folder.
+If you've already cloned the repository, use that existing folder.
 
-## 2. Initialize the server packages
+## 2. Set up the server packages
 
-This section is for converting the original comment guides into real package configuration. Perform it once. If `server/package.json` is already valid and its dependencies are installed, continue to section 3.
+You only need to do this once. The original `package.json` files are comment guides, and this step converts them into real package configurations. If `server/package.json` is already valid and the dependencies are installed, skip to section 3.
 
 From the project root:
 
@@ -39,26 +39,26 @@ npm install express cors dotenv better-sqlite3 bcryptjs jsonwebtoken zod helmet 
 npm install --save-dev nodemon
 ```
 
-The original instructions remain in `server/package-guide.txt`. The new `server/package.json` must contain valid JSON without comments.
+The original instructions are preserved in `server/package-guide.txt`. The new `server/package.json` must be valid JSON with no comments.
 
-If npm reports an unapproved install script for `better-sqlite3`, review it and approve that package:
+If npm reports an unapproved install script for `better-sqlite3`, review it and approve the package:
 
 ```powershell
 npm install-scripts ls
 npm install-scripts approve better-sqlite3
 ```
 
-Inspect any reported vulnerabilities:
+Then check for vulnerabilities:
 
 ```powershell
 npm audit
 ```
 
-Review the report before choosing a dependency update. `npm audit fix --force` can introduce breaking changes.
+Review the report before deciding what to update. Avoid `npm audit fix --force`, since it can introduce breaking changes.
 
-## 3. Initialize the client packages
+## 3. Set up the client packages
 
-Open a second terminal at the project root. Perform this section once if the client package file still contains the original guide comments.
+Open a second terminal at the project root. As with the server, do this once, and only if the client's package file still contains the original guide comments.
 
 ```powershell
 cd client
@@ -70,17 +70,24 @@ npm install react react-dom react-router-dom
 npm install --save-dev vite @vitejs/plugin-react
 ```
 
-The timing chart can use ordinary React elements. Install `recharts` only if the teacher interface uses that library.
+The timing chart works with plain React elements. Install `recharts` only if the teacher interface ends up using it.
 
 ## 4. Track the package files
 
-Before committing, configure actual Git ignore rules for both folders. Exclude `node_modules`, real `.env` files, `client/dist`, and SQLite database files including their WAL and SHM companions. Keep `.env.example` tracked.
+Before committing, set up Git ignore rules for both folders. Make sure the following are excluded:
 
-Commit both `package.json` files and both generated `package-lock.json` files. These let teammates install the same dependency versions.
+- `node_modules`
+- Real `.env` files
+- `client/dist`
+- SQLite database files, including their WAL and SHM companions
 
-## 5. Install dependencies on another computer
+Keep `.env.example` tracked.
 
-After cloning a repository with valid package files and committed lockfiles, use these commands from the project root. Skip the initialization and rename commands in sections 2 and 3.
+Commit both `package.json` files and both `package-lock.json` files so everyone installs the same dependency versions.
+
+## 5. Install on another computer
+
+If you've cloned a repository that already has valid package files and committed lockfiles, skip sections 2 and 3 and run the following from the project root:
 
 ```powershell
 cd server
@@ -92,7 +99,7 @@ cd ..
 
 ## 6. Configure the environment
 
-Complete the actual `.env.example` templates before copying them. From the project root:
+Complete the `.env.example` templates first, then copy them. From the project root:
 
 ```powershell
 Copy-Item server/.env.example server/.env
@@ -116,9 +123,9 @@ VITE_API_URL=http://localhost:4000/api
 
 ## 7. Run the application
 
-These commands require implemented source files and configuration. Installing dependencies alone does not turn the comment guides into an application. Implement `vite.config.js`, `index.html`, and the application modules before starting the client. Replace the comments in `vercel.json` with valid JSON before deployment.
+Installing dependencies doesn't produce a working app on its own. These commands require the source files and configuration to be in place. Before starting the client, make sure `vite.config.js`, `index.html`, and the application modules are implemented. Before deploying, replace the comments in `vercel.json` with valid JSON.
 
-In the first terminal, starting at the project root:
+In the first terminal, from the project root:
 
 ```powershell
 cd server
@@ -126,29 +133,29 @@ npm run migrate
 npm run dev
 ```
 
-To add optional demo users and a sample quiz, run `npm run seed` after migration and before starting the server.
+To add optional demo users and a sample quiz, run `npm run seed` after the migration and before starting the server.
 
-In the second terminal, starting at the project root:
+In the second terminal, from the project root:
 
 ```powershell
 cd client
 npm run dev
 ```
 
-Open `http://localhost:5173`. The server health endpoint is `http://localhost:4000/health`.
+Open `http://localhost:5173` in your browser. You can confirm the server is running at `http://localhost:4000/health`.
 
-## 8. Run checks and create a client build
+## 8. Run checks and build the client
 
-In the server terminal, stop development with `Ctrl+C`, then run:
+In the server terminal, stop the dev server with `Ctrl+C`, then run:
 
 ```powershell
 npm test
 ```
 
-In the client terminal, stop development with `Ctrl+C`, then run:
+In the client terminal, stop the dev server with `Ctrl+C`, then run:
 
 ```powershell
 npm run build
 ```
 
-The client build is written to `client/dist`.
+The build is written to `client/dist`.
