@@ -1,38 +1,17 @@
-# File: server/.gitignore
-# Purpose: Repository exclusions for dependencies, secrets, and database files.
-# Responsibility: Jed Manaloto, backend development.
-#
-# Implementation guide.
-#
-# Integration contract:
-# In the exact supplied structure this file governs the server subtree. Client ignore setup is
-# an implementation time housekeeping task, not an extra file in this guide ZIP.
-#
-# Acceptance criteria:
-# Git status excludes local server dependencies, actual secrets, and SQLite working files
-# while retaining guides and future source.
-#
-# Implementation notes:
-# Do not rely on ../ patterns to ignore sibling directories: a .gitignore cannot govern paths
-# outside its scope. Add a root/client ignore file when implementation starts, or use local
-# .git/info/exclude until then.
-#
-# Implementation steps:
-# 1. Replace the comments with active ignore patterns once you begin implementation.
-# 2. Ignore node_modules, .env, .env.local, other real environment files, npm debug logs, and
-#    coverage output. Keep .env.example tracked.
-# 3. Ignore local data/*.db and the SQLite companion files data/*.db-wal and data/*.db-shm.
-#    Ignore other development SQLite files if your team uses a different local DB extension.
-# 4. This file only controls the server subtree. When implementation begins, add a root/client
-#    ignore file for client/node_modules, client/dist, and real client environment files, or
-#    use local .git/info/exclude while retaining the exact guide structure. Preserve
-#    client/.env.example.
-# 5. Keep generated package-lock.json files tracked for reproducible installs. Never ignore
-#    src/db/schema.sql or migration source.
-# 6. Check Git status before every commit and remove already tracked secrets or databases from
-#    the index; adding ignore patterns does not untrack existing files.
-#
-# Related files and dependencies:
-# Git working tree
-# server/.env.example
-# local server/data directory
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+build/
+coverage/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.log
