@@ -1,0 +1,47 @@
+/**
+ * @file client/src/styles/index.css
+ * @description
+ * Shared visual styles for authentication, student pages, and teacher pages.
+ *
+ * Responsibility: Shared frontend development.
+ * Implementation guide.
+ *
+ * Integration contract:
+ * One global style file in the supplied structure. No CSS declarations are implemented in this
+ * ZIP; this is the shared styling task guide.
+ *
+ * Acceptance criteria:
+ * All pages share typography/spacing, work on mobile, and retain readable contrast and visible
+ * keyboard focus.
+ *
+ * @todo Agree on CSS variables before splitting UI work: page/surface colors, text/muted text,
+ *       brand accent, concern colors, spacing, radius, shadows, and focus ring.
+ *
+ * @todo Implement a base reset, readable typography, shared container widths, labelled form
+ *       controls, primary/secondary buttons, disabled states, and visible keyboard focus.
+ *
+ * @todo Add reusable layout styles for Navbar, cards, page headers, empty/loading/error
+ *       states, tables, question navigator, countdown, consent dialog, and teacher action
+ *       controls.
+ *
+ * @todo Give concern badges consistent green/amber/red styling plus text. Style confidence
+ *       notes neutrally so a low confidence flag does not look like a misconduct verdict.
+ *
+ * @todo Support narrow screens with stacked forms/cards, a usable question navigator, and
+ *       horizontally scrollable teacher tables where appropriate. Avoid tiny text or clipped
+ *       buttons.
+ *
+ * @todo Provide dialog/backdrop and selected timeline event styles. Keep chart labels and
+ *       answer text readable with long prompts or responses.
+ *
+ * @todo Use subtle optional transitions and respect prefers-reduced-motion. Keep CSS
+ *       presentation only; events, countdown, scoring, and permissions belong in
+ *       JavaScript/server modules.
+ *
+ * @todo Coordinate class names with both frontend owners before merging so student and teacher
+ *       pages share the same tokens and controls.
+ *
+ * @see client/src/main.jsx imports this file
+ *
+ * @see all pages and components use its agreed classes
+ */

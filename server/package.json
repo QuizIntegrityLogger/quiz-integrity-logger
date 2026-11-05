@@ -1,0 +1,46 @@
+/**
+ * @file server/package.json
+ * @description
+ * Server dependencies, npm scripts, and runtime requirements.
+ *
+ * Responsibility: Jed Manaloto, backend development.
+ * Implementation guide.
+ *
+ * Integration contract:
+ * Deployment root: server. Build: npm ci after a lockfile exists. Start: npm start. No root
+ * level package is required.
+ *
+ * Acceptance criteria:
+ * Every script points to an implemented file and npm test passes with the chosen Node version.
+ *
+ * Implementation notes:
+ * This ZIP intentionally has no executable package manifest and no generated lockfiles.
+ * References: README.md, Deployment and official references.
+ *
+ * @todo Replace this guide with valid JSON before running npm. JSON does not support these
+ *       comments.
+ *
+ * @todo Set a private package named quiz-integrity-logger-server and select ES modules with
+ *       the type field set to module. Use explicit .js extensions for local server imports.
+ *
+ * @todo Add express, cors, dotenv, better-sqlite3, bcryptjs, jsonwebtoken, zod, helmet, and
+ *       morgan as runtime dependencies. Add nodemon as a development dependency.
+ *
+ * @todo Define dev to run nodemon src/index.js, start to run node src/index.js, migrate to run
+ *       node src/db/migrate.js, seed to run node src/db/seed.js, and test to run node --test.
+ *
+ * @todo Set engines to Node 24.x and use the same major version locally and on Render. Confirm
+ *       dependency compatibility before installation.
+ *
+ * @todo Install in the server directory after implementation and commit the generated
+ *       package-lock.json. Use npm ci on Render once the lockfile exists; do not copy local
+ *       node_modules to the server.
+ *
+ * @see server/src/index.js
+ *
+ * @see server/src/db/migrate.js
+ *
+ * @see server/src/db/seed.js
+ *
+ * @see server/src/tests/scoring.test.js
+ */

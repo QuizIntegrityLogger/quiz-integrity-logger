@@ -1,0 +1,39 @@
+/**
+ * @file client/vercel.json
+ * @description
+ * SPA routing configuration for direct links and page refreshes on Vercel.
+ *
+ * Responsibility: Shared frontend development.
+ * Implementation guide.
+ *
+ * Integration contract:
+ * Deployment configuration for the client application. Source pattern: /(.*). Destination:
+ * /index.html. Replace this documentation block with valid JSON during implementation.
+ *
+ * Acceptance criteria:
+ * Refreshing /teacher/attempt/5 and /student/attempt/5 serves the app instead of a platform
+ * 404.
+ *
+ * @todo Replace these comments with valid JSON when implementing deployment configuration.
+ *
+ * @todo Configure a rewrites entry whose source is /(.*) and destination is /index.html,
+ *       following the official Vercel Vite SPA guidance linked in README.md.
+ *
+ * @todo Keep the Vercel project root set to client. This file belongs in that root beside
+ *       client/package.json, not at the repository root.
+ *
+ * @todo Continue sending API requests to the absolute Render VITE_API_URL; this catch all is
+ *       for client navigation, not a backend replacement.
+ *
+ * @todo Leave cleanUrls unset unless you deliberately adjust the destination per Vercel
+ *       documentation.
+ *
+ * @todo After deploying the implemented app, open a teacher review route directly and refresh
+ *       it; verify that React Router handles the path and auth guard.
+ *
+ * @see client/src/App.jsx
+ *
+ * @see client/index.html
+ *
+ * @see Vercel project settings
+ */
