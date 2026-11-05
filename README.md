@@ -1,4 +1,4 @@
-[Installation Guide](installation.md)
+[Installation Guide](INSTALLATION.md)
 
 # Quiz Integrity Logger
 
