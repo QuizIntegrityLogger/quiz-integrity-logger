@@ -1,0 +1,4 @@
+-- File: server/src/db/schema.sql
+-- Define users, quizzes, questions, attempts, answers, events, and results. Include foreign
+-- keys, indexes, unique attempt/answer/event/result constraints, response versions, deadlines,
+-- and teacher decision fields.

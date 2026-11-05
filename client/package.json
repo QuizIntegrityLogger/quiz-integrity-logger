@@ -1,44 +1,6 @@
 /**
  * @file client/package.json
  * @description
- * React dependencies, Vite tooling, and client build scripts.
- *
- * Responsibility: Shared frontend development.
- * Implementation guide.
- *
- * Integration contract:
- * Client commands run inside client. No app can start from this comment only manifest until it
- * is implemented.
- *
- * Acceptance criteria:
- * A clean install works with the selected Node major and the production build produces
- * client/dist.
- *
- * @todo Replace this guide with valid JSON before installing packages; these // guide comments
- *       are not valid JSON.
- *
- * @todo Name the private package quiz-integrity-logger-client and use ES modules. Add react,
- *       react-dom, and react-router-dom as runtime dependencies.
- *
- * @todo Add vite and @vitejs/plugin-react as development dependencies. Recharts is optional
- *       for the per question time chart; otherwise build an accessible chart from ordinary
- *       elements.
- *
- * @todo Define dev to run vite, build to run vite build, and preview to run vite preview. Pin
- *       a mutually compatible supported package set and Node 24.x for the team.
- *
- * @todo Run npm install from client after implementing the manifest. Commit its generated
- *       package-lock.json and keep node_modules and dist untracked.
- *
- * @todo For Vercel use client as the project root, npm run build as the build command, and
- *       dist as the output directory.
- *
- * @todo Keep client and server dependencies independent. The project root intentionally has no
- *       npm workspace or package.json.
- *
- * @see client/vite.config.js
- *
- * @see client/src/main.jsx
- *
- * @see client/src/pages/teacher/AttemptReview.jsx
+ * Configure React dependencies, Vite tooling, Node 24.x, and dev/build/preview scripts.
+ * Replace this guide with valid JSON.
  */
