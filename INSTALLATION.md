@@ -18,74 +18,15 @@ git clone https://github.com/QuizIntegrityLogger/quiz-integrity-logger.git
 cd quiz-integrity-logger
 ```
 
-If you've already cloned the repository, use that existing folder.
-
-## 2. Set up the server packages
-
-You only need to do this once. The original `package.json` files are comment guides, and this step converts them into real package configurations. If `server/package.json` is already valid and the dependencies are installed, skip to section 3.
-
-From the project root:
+If you've already cloned the repository, use that existing folder and pull the latest changes:
 
 ```powershell
-cd server
-Rename-Item package.json package-guide.txt
-npm init -y
-npm pkg set type=module "engines.node=24.x"
-npm pkg set "scripts.dev=nodemon src/index.js" "scripts.start=node src/index.js"
-npm pkg set "scripts.migrate=node src/db/migrate.js" "scripts.seed=node src/db/seed.js" "scripts.test=node --test"
-npm install express cors dotenv better-sqlite3 bcryptjs jsonwebtoken zod helmet morgan
-npm install --save-dev nodemon
+git pull
 ```
 
-The original instructions are preserved in `server/package-guide.txt`. The new `server/package.json` must be valid JSON with no comments.
+## 2. Install the packages
 
-If npm reports an unapproved install script for `better-sqlite3`, review it and approve the package:
-
-```powershell
-npm install-scripts ls
-npm install-scripts approve better-sqlite3
-```
-
-Then check for vulnerabilities:
-
-```powershell
-npm audit
-```
-
-Review the report before deciding what to update. Avoid `npm audit fix --force`, since it can introduce breaking changes.
-
-## 3. Set up the client packages
-
-Open a second terminal at the project root. As with the server, do this once, and only if the client's package file still contains the original guide comments.
-
-```powershell
-cd client
-Rename-Item package.json package-guide.txt
-npm init -y
-npm pkg set type=module "engines.node=24.x"
-npm pkg set "scripts.dev=vite" "scripts.build=vite build" "scripts.preview=vite preview"
-npm install react react-dom react-router-dom
-npm install --save-dev vite @vitejs/plugin-react
-```
-
-The timing chart works with plain React elements. Install `recharts` only if the teacher interface ends up using it.
-
-## 4. Track the package files
-
-Before committing, set up Git ignore rules for both folders. Make sure the following are excluded:
-
-- `node_modules`
-- Real `.env` files
-- `client/dist`
-- SQLite database files, including their WAL and SHM companions
-
-Keep `.env.example` tracked.
-
-Commit both `package.json` files and both `package-lock.json` files so everyone installs the same dependency versions.
-
-## 5. Install on another computer
-
-If you've cloned a repository that already has valid package files and committed lockfiles, skip sections 2 and 3 and run the following from the project root:
+The `package.json` and `package-lock.json` files for both `server` and `client` are already committed, so there is no package setup to do. Just install the exact versions recorded in the lockfiles. From the project root:
 
 ```powershell
 cd server
@@ -95,9 +36,22 @@ npm ci
 cd ..
 ```
 
-## 6. Configure the environment
+Do not run `npm init`, `npm pkg set`, or `npm install <package>` for the initial setup. Those would change the committed package files. Use `npm install <package>` only when you are intentionally adding a new dependency, and commit the updated `package.json` and `package-lock.json` together.
 
-Complete the `.env.example` templates first, then copy them. From the project root:
+If npm reports an unapproved install script for `better-sqlite3`, review it and approve the package:
+
+```powershell
+cd server
+npm install-scripts ls
+npm install-scripts approve better-sqlite3
+cd ..
+```
+
+To check for vulnerabilities, run `npm audit` inside `server` or `client`. Review the report before deciding what to update, and avoid `npm audit fix --force`, since it can introduce breaking changes.
+
+## 3. Configure the environment
+
+Copy the example files to real `.env` files. From the project root:
 
 ```powershell
 Copy-Item server/.env.example server/.env
@@ -119,7 +73,9 @@ Replace the JWT placeholder with your own secret. In `client/.env`, set:
 VITE_API_URL=http://localhost:4000/api
 ```
 
-## 7. Run the application
+Real `.env` files are ignored by Git, so your secret stays on your machine. Never commit them.
+
+## 4. Run the application
 
 Installing dependencies doesn't produce a working app on its own. These commands require the source files and configuration to be in place. Before starting the client, make sure `vite.config.js`, `index.html`, and the application modules are implemented. Before deploying, replace the comments in `vercel.json` with valid JSON.
 
@@ -133,7 +89,7 @@ npm run dev
 
 To add optional demo users and a sample quiz, run `npm run seed` after the migration and before starting the server.
 
-In the second terminal, from the project root:
+Open a second terminal at the project root and run:
 
 ```powershell
 cd client
@@ -142,7 +98,7 @@ npm run dev
 
 Open `http://localhost:5173` in your browser. You can confirm the server is running at `http://localhost:4000/health`.
 
-## 8. Run checks and build the client
+## 5. Run checks and build the client
 
 In the server terminal, stop the dev server with `Ctrl+C`, then run:
 
@@ -157,3 +113,11 @@ npm run build
 ```
 
 The build is written to `client/dist`.
+
+## 6. Committing your changes
+
+The root `.gitignore` already excludes `node_modules`, real `.env` files, build output, SQLite database files (including their WAL and SHM companions), and log files. `.env.example` stays tracked. Before committing, run `git status` and confirm that none of the ignored items appear.
+
+When you add or update a dependency, commit both `package.json` and `package-lock.json` so everyone installs the same versions.
+
+The timing chart works with plain React elements. Install `recharts` in `client` only if the teacher interface ends up using it.
