@@ -1,6 +1,3 @@
-/**
- * @file client/vercel.json
- * @description
- * Configure the SPA rewrite to index.html so direct page links and refreshes work on Vercel.
- * Replace this guide with valid JSON.
- */
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
