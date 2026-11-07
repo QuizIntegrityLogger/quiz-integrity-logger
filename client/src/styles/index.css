@@ -4,4 +4,416 @@
  * Define shared visual tokens and responsive styles for forms, quiz pages, tables, dialogs,
  * and review components. Include keyboard focus, readable contrast, and reduced motion
  * support.
+ *
+ * Page-specific styles belong in their own CSS files. Only add shared tokens and base styles here.
  */
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light;
+
+  /* Typography */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --leading: 1.5;
+
+  /* Spacing and shape */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  --max-width: 72rem;
+  --tap-size: 2.75rem; /* minimum touch target */
+
+  /* Surfaces and text */
+  --color-bg: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-surface-alt: #eef0f3;
+  --color-border: #d1d5db;
+  --color-text: #111827;
+  --color-text-muted: #4b5563;
+
+  /* Buttons */
+  --btn-primary-bg: #1d4ed8;
+  --btn-primary-bg-hover: #1e40af;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: #9ca3af;
+  --btn-secondary-bg-hover: #f3f4f6;
+  --btn-danger-bg: #b91c1c;
+  --btn-danger-bg-hover: #991b1b;
+
+  /* Keyboard focus */
+  --focus-ring: 3px solid #1d4ed8;
+  --focus-offset: 2px;
+
+  /* Status messages */
+  --status-error-bg: #fde8e8;
+  --status-error-text: #8a1c1c;
+  --status-error-border: #e48b8b;
+  --status-success-bg: #e6f4ea;
+  --status-success-text: #14532d;
+  --status-success-border: #86c79b;
+
+  /* Concern levels (always shown with a text label, never color alone) */
+  --concern-low-bg: #e6f4ea;
+  --concern-low-text: #14532d;
+  --concern-low-border: #86c79b;
+  --concern-medium-bg: #fff4d6;
+  --concern-medium-text: #7a4a00;
+  --concern-medium-border: #e0b252;
+  --concern-high-bg: #fde8e8;
+  --concern-high-text: #8a1c1c;
+  --concern-high-border: #e48b8b;
+
+  /* Confidence notices */
+  --confidence-bg: #eef2ff;
+  --confidence-text: #243b8f;
+  --confidence-border: #b3c0f2;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.25;
+}
+h1 {
+  font-size: var(--text-xl);
+}
+h2 {
+  font-size: var(--text-lg);
+}
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--btn-primary-bg);
+  text-underline-offset: 0.15em;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding: var(--space-4);
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-4);
+}
+
+/* ---------- Forms ---------- */
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+label {
+  font-weight: 600;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  width: 100%;
+  min-height: var(--tap-size);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--btn-secondary-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: inherit;
+  font: inherit; /* 16px keeps phones from zooming into fields */
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--btn-primary-bg);
+}
+
+[aria-invalid="true"] {
+  border-color: var(--status-error-text);
+}
+
+.field-hint {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.field-error {
+  color: var(--status-error-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+/* A checkbox or radio with its label on one line */
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--tap-size);
+  font-weight: 400;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-size);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--btn-primary-bg-hover);
+}
+
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  border-color: var(--btn-secondary-border);
+  color: var(--color-text);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--btn-secondary-bg-hover);
+}
+
+.btn-danger {
+  background: var(--btn-danger-bg);
+  color: #ffffff;
+}
+.btn-danger:hover:not(:disabled) {
+  background: var(--btn-danger-bg-hover);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Loading and messages ---------- */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--btn-primary-bg);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+}
+.alert-error {
+  background: var(--status-error-bg);
+  border-color: var(--status-error-border);
+  color: var(--status-error-text);
+}
+.alert-success {
+  background: var(--status-success-bg);
+  border-color: var(--status-success-border);
+  color: var(--status-success-text);
+}
+
+/* ---------- Concern badges and confidence notice ---------- */
+.badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-low {
+  background: var(--concern-low-bg);
+  border-color: var(--concern-low-border);
+  color: var(--concern-low-text);
+}
+.badge-medium {
+  background: var(--concern-medium-bg);
+  border-color: var(--concern-medium-border);
+  color: var(--concern-medium-text);
+}
+.badge-high {
+  background: var(--concern-high-bg);
+  border-color: var(--concern-high-border);
+  color: var(--concern-high-text);
+}
+
+.notice {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+}
+.notice-confidence {
+  background: var(--confidence-bg);
+  border-color: var(--confidence-border);
+  color: var(--confidence-text);
+}
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--color-surface-alt);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: var(--color-surface-alt);
+}
+
+/* ---------- Larger screens ---------- */
+@media (min-width: 48rem) {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  .container {
+    padding: var(--space-6);
+  }
+  .card {
+    padding: var(--space-5);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
