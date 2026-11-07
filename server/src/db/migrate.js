@@ -3,10 +3,6 @@
  * @description
  * Load and apply schema.sql through the shared connection. Export migration execution and
  * support the CLI without deleting existing data.
- *
- * The applied version is stored in SQLite's built-in user_version, so no extra table is needed.
- * To change the database later, add a new step at the END of MIGRATIONS with the next version
- * number. Never edit a step that has already been applied anywhere.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,14 +15,10 @@ export const MIGRATIONS = [
   {
     version: 1,
     name: "create initial tables",
-    up: (conn) => conn.exec(fs.readFileSync(schemaUrl, "utf8")), // safe to repeat (IF NOT EXISTS)
+    up: (conn) => conn.exec(fs.readFileSync(schemaUrl, "utf8")), 
+
   },
-  // Example of a later step:
-  // {
-  //   version: 2,
-  //   name: 'add quizzes.shuffle_questions',
-  //   up: (conn) => conn.exec('ALTER TABLE quizzes ADD COLUMN shuffle_questions INTEGER NOT NULL DEFAULT 0'),
-  // },
+
 ];
 
 MIGRATIONS.forEach((m, i) => {
@@ -47,7 +39,7 @@ export function migrate(conn = db) {
 
   const applied = [];
   for (const step of MIGRATIONS.filter((m) => m.version > from)) {
-    // The step and its version bump succeed or fail together.
+
     conn.transaction(() => {
       step.up(conn);
       conn.pragma(`user_version = ${step.version}`);
@@ -59,7 +51,6 @@ export function migrate(conn = db) {
   return { from, to: latest, applied };
 }
 
-// Support: npm run migrate
 const isDirectRun =
   process.argv[1] &&
   import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
