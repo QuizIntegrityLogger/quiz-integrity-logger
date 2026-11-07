@@ -6,4 +6,4 @@ Will edit this after setting up github issues, configs, mds, pre-deployment and 
 
 # Git Workflow
 
-[Click this for the Guide](WORKFLOW.md)
+[Click this for more info](WORKFLOW.md)
