@@ -4,9 +4,11 @@ This guide is about how we keep our own branches up to date with `main`. Wheneve
 
 ## Here is the whole routine. Swap the branch name to git checkout jeds into own your own branch `christine` or `kristine`.
 
+```
 git add .
 git commit -m "Describe what you changed"
 git checkout main
 git pull
 git checkout jeds
 git rebase main
+```
