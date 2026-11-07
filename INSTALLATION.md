@@ -67,7 +67,15 @@ DB_PATH=./data/app.db
 CLIENT_ORIGIN=http://localhost:5173
 ```
 
-Replace the JWT placeholder with your own secret. In `client/.env`, set:
+Replace the JWT placeholder with your own secret. To generate one, run this in any terminal, since Node is already installed:
+
+```powershell
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+
+It prints a 128 character random string. Copy it and paste it after `JWT_SECRET=` in `server/.env`, with no quotes and no spaces. Each person should generate their own secret, and it should never be committed or shared in chat. If you change the secret later, restart the server and log in again, because tokens signed with the old secret stop working.
+
+In `client/.env`, set:
 
 ```dotenv
 VITE_API_URL=http://localhost:4000/api
@@ -114,7 +122,30 @@ npm run build
 
 The build is written to `client/dist`.
 
-## 6. Committing your changes
+## 6. Working on your branch
+
+Teammates work on their own branch instead of committing straight to `main`. The branches `kristine` and `christine` already exist on GitHub, so you don't create them yourself. Fetch them and switch to yours from the project root:
+
+```powershell
+git fetch
+git checkout kristine
+```
+
+Use `christine` instead if that is your branch. Git sets up the tracking for you, so a plain `git push` and `git pull` work from then on. Confirm you are on the right branch with:
+
+```powershell
+git branch
+```
+
+Your branch may be behind `main`. Bring it up to date before you start working:
+
+```powershell
+git pull origin main
+```
+
+Then run `npm ci` again in `server` and `client` in case the package files changed.
+
+## 7. Committing your changes
 
 The root `.gitignore` already excludes `node_modules`, real `.env` files, build output, SQLite database files (including their WAL and SHM companions), and log files. `.env.example` stays tracked. Before committing, run `git status` and confirm that none of the ignored items appear.
 
