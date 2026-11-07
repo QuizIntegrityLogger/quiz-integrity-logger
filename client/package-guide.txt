@@ -1,6 +1,0 @@
-/**
- * @file client/package.json
- * @description
- * Configure React dependencies, Vite tooling, Node 24.x, and dev/build/preview scripts.
- * Replace this guide with valid JSON.
- */
