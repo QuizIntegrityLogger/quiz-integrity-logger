@@ -1,4 +1,4 @@
-Will edit this after setting up github issues, configs, mds, pre-deployment and structures. By then you may start doing the issues. Right now you can install, setup and read the workflow below 
+Will edit this after setting up github issues, configs, mds, pre-deployment, structures, and kanban. By then you may start doing the issues. Right now you can install, setup and read the workflow below
 
 # Installation and Setup
 
