@@ -1,4 +1,4 @@
-This guide covers how to get Quiz Integrity Logger running on your machine. The commands are written for Windows PowerShell, so you may need to adjust a few if you're on a different shell. Follow the steps in order.
+This guide covers how to get Quiz Integrity Logger running on your computer. The commands are written for Windows PowerShell, so you may need to adjust a few if you're on a different shell. Follow the steps in order.
 
 The project uses Node.js 24 with npm. Confirm your versions before starting:
 
